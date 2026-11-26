@@ -58,6 +58,35 @@ learner flow:
    weekly Meet session, rotating mock-interview pairing, shared activity
    feed, escalation path to a mentor when the pod stalls as a group.
 
+## Common thread with the live Google Skills site
+
+Our wireframes were built from Google Cloud console screenshots provided in
+chat, not the public marketing site. Checked https://www.skills.google/
+directly (loaded the page and read its computed CSS, not just the markup)
+to see how closely that choice tracks the platform's actual current design:
+
+| Element | skills.google (verified live) | Our wireframes |
+|---|---|---|
+| Heading font | `Google Sans`, self-hosted by Google | `Google Sans` declared, `Inter` loaded (Google Fonts can't serve Google Sans) |
+| Body/button font | `Google Sans Text` | Same substitution as above |
+| Primary color | `#0b57d0` (a Material Design 3 token, `--md-sys-color-primary`) | `#1a73e8` (older/Material-2-era Google blue) |
+| H1 | 57px / 64px line-height, weight 500, -1.14px letter-spacing | 28-32px page titles, weight 500 (smaller app context, not a marketing hero) |
+| Positive stat color | `#458C47` | `#188038` |
+| Nav structure | Top bar (Home, Catalog, Paths, Subscriptions, Activities, Achievements, Settings, Sign in) | Top bar + left icon rail (matches the in-app Skills screenshots, which the marketing site, being a logged-out landing page, doesn't show) |
+
+**Takeaway:** the shared thread (Google Sans family, Material-style type
+scale, pill/rounded shapes, generous whitespace) held up. The specific blue
+didn't: the live site runs on Material Design 3 tokens (`#0b57d0`), while our
+wireframes used the Material 2 blue visible in the Google Cloud console
+screenshots we were given. A real build should pull from the live MD3 token
+(`--md-sys-color-primary`), not the `#1a73e8` used here. Full detail and the
+rest of the comparison is in [`design-system.md`](design-system.md).
+
+The marketing site is logged-out and has no in-product screens (dashboard,
+catalog browsing, courses), so it couldn't confirm or contradict the left
+icon-rail navigation, card shapes, or chip/pill components; those are still
+sourced only from the in-app screenshots provided in chat.
+
 ## What's platform-unique vs. generic
 
 Ranked by how much each depends on data only Google Skills has:

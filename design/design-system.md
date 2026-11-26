@@ -8,14 +8,34 @@ Skills feature can match it without reverse-engineering the HTML.
 Reference: the live canvas at https://claude.ai/artifact/8zHpJmCc4bAYo5Vr3QvDi3
 and the screen notes in [`README.md`](README.md).
 
-## Known gap
+## Known gaps, checked against the live site
 
-The font stack declares `'Google Sans','Google Sans Text'` first, matching
-the real Google Skills product, but Google Sans isn't available through
-Google Fonts for public loading. The actual webfont loaded in every screen
-is **Inter**, as a stand-in. If a real build has access to Google's internal
-font service, swap Inter out; everything else (sizes, weights, line-height)
-should carry over unchanged.
+Verified by loading https://www.skills.google/ directly and reading its
+computed styles (not guessed from markup):
+
+- **Font**: the real site loads `Google Sans` (headings) and
+  `Google Sans Text` (body, buttons, nav) as actual webfonts, confirmed via
+  `document.fonts`. These fonts aren't available through the public Google
+  Fonts API (`fonts.googleapis.com`), which is how our wireframes could
+  reach them; Google serves them from its own infrastructure to its own
+  properties. Our wireframes substitute **Inter** as a stand-in for the same
+  reason a build outside Google's infra would need to: everything else
+  (sizes, weights, line-height) should carry over unchanged once the real
+  font is available.
+- **Primary color**: the live site's root stylesheet sets
+  `--md-sys-color-primary: #0b57d0`, a Material Design 3 token. Our
+  wireframes used `#1a73e8` throughout, which is the older/Material-2-era
+  Google blue still visible in the Google Cloud console screenshots we
+  built from. **This is a real discrepancy.** A production build should use
+  `#0b57d0` as the primary, not `#1a73e8`. See `README.md` for the full
+  comparison.
+- The live hero stat numbers ("77%", "90%", "133%") render at 48px, weight
+  700, with the positive one colored `rgb(69,140,71)` / `#458C47`, a
+  different, more muted green than our `GRN` token (`#188038`).
+
+These were not available when the wireframes were first built (no live-site
+reference was checked at the time); they're recorded here so a real
+implementation uses the live tokens, not the wireframe approximations.
 
 ## Color tokens
 
