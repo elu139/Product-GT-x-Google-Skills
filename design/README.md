@@ -1,5 +1,10 @@
 # Design
 
+Visual system: [`design-system.md`](design-system.md) documents the exact
+color tokens, spacing, radii, typography, and components used to build the
+high-fidelity screens below, so another team can match the look when
+building a different Skills feature.
+
 Two canvases. Neither has been opened/rendered by Claude after generation,
 check for clipped text or crowded layouts before presenting.
 
